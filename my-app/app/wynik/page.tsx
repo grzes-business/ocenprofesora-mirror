@@ -59,7 +59,7 @@ export default function WynikPage() {
           <input
             key={star}
             type="radio"
-            className="mask mask-star-2 bg-orange-400"
+            className="mask mask-star-2 bg-warning"
             checked={star === Math.round(rating)}
             readOnly
           />
@@ -69,28 +69,16 @@ export default function WynikPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200">
       {/* Search Section */}
-      <div className="bg-white py-8 shadow-sm border-b border-gray-200">
+      <div className="bg-base-100 py-8 shadow-sm border-b border-base-200">
         <div className="container mx-auto px-4">
           <form onSubmit={handleSearch} className="max-w-3xl mx-auto">
             <div className="join w-full">
               <input
                 type="text"
                 placeholder="Wpisz imię i nazwisko profesora..."
-                className="input input-bordered join-item w-full bg-white text-gray-900 placeholder:text-gray-500"
+                className="input input-bordered join-item w-full bg-base-100 text-base-content"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -114,26 +102,26 @@ export default function WynikPage() {
               <h1 className="text-2xl font-bold">
                 Wyniki wyszukiwania
                 {searchParams.get("q") && (
-                  <span className="text-gray-600">
+                  <span className="text-base-content opacity-80">
                     {" "}
                     dla: &quot;{searchParams.get("q")}&quot;
                   </span>
                 )}
               </h1>
-              <p className="text-gray-600 mt-2">
+              <p className="text-base-content opacity-80 mt-2">
                 Znaleziono: {profesorowie.length}{" "}
                 {profesorowie.length === 1 ? "profesor" : "profesorów"}
               </p>
             </div>
 
             {profesorowie.length === 0 ? (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <div className="bg-info border border-info rounded-lg p-6">
                 <div className="flex gap-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    className="stroke-blue-600 shrink-0 w-6 h-6"
+                    className="stroke-info-content shrink-0 w-6 h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -142,11 +130,11 @@ export default function WynikPage() {
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path>
                   </svg>
-                  <span className="text-gray-700">
+                  <span className="text-info-content">
                     Nie znaleziono profesorów. Spróbuj wyszukać ponownie lub{" "}
                     <Link
                       href="/dodaj-profesora"
-                      className="text-primary font-semibold hover:underline"
+                      className="text-info-content font-semibold hover:underline"
                     >
                       dodaj nowego profesora
                     </Link>
@@ -160,7 +148,7 @@ export default function WynikPage() {
                   <Link
                     key={profesor.id_profesora}
                     href={`/profesor/${profesor.id_profesora}`}
-                    className="card bg-white shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+                    className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow border border-base-200"
                   >
                     <div className="card-body">
                       <div className="flex justify-between items-start">
@@ -169,11 +157,11 @@ export default function WynikPage() {
                             {profesor.tytul_naukowy} {profesor.imie}{" "}
                             {profesor.nazwisko}
                           </h2>
-                          <p className="text-sm text-gray-600 mt-2">
+                          <p className="text-sm text-base-content opacity-80 mt-2">
                             {getInstitutionNames(profesor.tab_id_instytucji)}
                           </p>
                           {profesor.szczegoly && (
-                            <p className="text-sm text-gray-700 mt-3">
+                            <p className="text-sm text-base-content mt-3">
                               {profesor.szczegoly}
                             </p>
                           )}

@@ -18,7 +18,7 @@ export default function ProfilPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
@@ -35,30 +35,9 @@ export default function ProfilPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-        <div className="flex-none">
-          <Link
-            href="/"
-            className="btn btn-ghost text-gray-700 hover:bg-indigo-50"
-          >
-            ← Strona główna
-          </Link>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200">
       <main className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* Profile Header */}
-        <div className="card bg-white shadow-xl border border-gray-200 mb-6">
+        <div className="card bg-base-100 shadow-xl border border-base-200 mb-6">
           <div className="card-body">
             <div className="flex items-center gap-4 mb-4">
               <div className="avatar">
@@ -66,14 +45,15 @@ export default function ProfilPage() {
                   <img
                     src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
                     alt="User Avatar"
+                    className="drag-none"
                   />
                 </div>
               </div>
               <div className="flex-1">
-                <h1 className="text-3xl font-bold text-gray-800">
+                <h1 className="text-3xl font-bold text-base-content">
                   {user.imie_wyswietlane || "Użytkownik"}
                 </h1>
-                <p className="text-gray-600">{user.email}</p>
+                <p className="text-base-content">{user.email}</p>
                 {user.zweryfikowany && (
                   <div className="badge badge-success gap-1 mt-2">
                     <svg
@@ -98,48 +78,48 @@ export default function ProfilPage() {
 
             {user.bio && (
               <div className="mt-4">
-                <h3 className="font-semibold text-gray-700 mb-2">O mnie</h3>
-                <p className="text-gray-600">{user.bio}</p>
+                <h3 className="font-semibold text-base-content mb-2">O mnie</h3>
+                <p className="text-base-content">{user.bio}</p>
               </div>
             )}
           </div>
         </div>
 
         {/* Profile Info */}
-        <div className="card bg-white shadow-xl border border-gray-200 mb-6">
+        <div className="card bg-base-100 shadow-xl border border-base-200 mb-6">
           <div className="card-body">
-            <h2 className="card-title text-2xl text-gray-800 mb-4">
+            <h2 className="card-title text-2xl text-base-content mb-4">
               Informacje o profilu
             </h2>
 
             <div className="space-y-4">
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
+                  <span className="label-text font-medium text-base-content">
                     Kierunek studiów
                   </span>
                 </label>
-                <div className="text-gray-800">{user.kierunek}</div>
+                <div className="text-base-content">{user.kierunek}</div>
               </div>
 
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
+                  <span className="label-text font-medium text-base-content">
                     Uczelnie
                   </span>
                 </label>
-                <div className="text-gray-800">
+                <div className="text-base-content">
                   {getInstitutionNames(user.tab_id_instytucji) || "Brak"}
                 </div>
               </div>
 
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
+                  <span className="label-text font-medium text-base-content">
                     Status konta
                   </span>
                 </label>
-                <div className="text-gray-800">
+                <div className="text-base-content">
                   {user.zweryfikowany ? "Zweryfikowane" : "Niezweryfikowane"}
                 </div>
               </div>
@@ -148,9 +128,9 @@ export default function ProfilPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="card bg-white shadow-xl border border-gray-200 mb-6">
+        <div className="card bg-base-100 shadow-xl border border-base-200 mb-6">
           <div className="card-body">
-            <h2 className="card-title text-2xl text-gray-800 mb-4">
+            <h2 className="card-title text-2xl text-base-content mb-4">
               Szybkie akcje
             </h2>
 

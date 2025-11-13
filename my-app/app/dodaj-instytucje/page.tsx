@@ -42,56 +42,36 @@ export default function DodajInstytucjePage() {
           strona_www: "",
         });
         setSukces(false);
-      }, 2000);
+      }, 5000);
     }, 1000);
   };
 
   if (!zalogowany) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-        <div className="flex-none gap-2">
-          <Link
-            href="/profil"
-            className="btn btn-ghost text-gray-700 hover:bg-indigo-50"
-          >
-            ← Profil
-          </Link>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200">
       <main className="container mx-auto px-4 py-8 max-w-2xl">
-        <div className="card bg-white shadow-xl border border-gray-200">
+        <div className="card bg-base-100 shadow-xl border border-base-200">
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            <h1 className="text-3xl font-bold text-base-content mb-2">
               Dodaj nową instytucję
             </h1>
-            <p className="text-gray-600 mb-6">
+            <p className="text-base-content mb-6">
               Wypełnij poniższy formularz, aby dodać uczelnię do bazy danych.
             </p>
 
             {sukces && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="bg-success text-success-content bg-opacity-10 border border-success rounded-lg p-4 mb-6">
                 <div className="flex gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-green-600 shrink-0 h-6 w-6"
+                    className="stroke-success-content shrink-0 h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -102,7 +82,7 @@ export default function DodajInstytucjePage() {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="text-green-800 font-medium">
+                  <span className="font-medium">
                     Instytucja została pomyślnie dodana!
                   </span>
                 </div>
@@ -110,16 +90,16 @@ export default function DodajInstytucjePage() {
             )}
 
             <form onSubmit={handleSubmit}>
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Nazwa uczelni <span className="text-red-500">*</span>
+                  <span className="label-text font-medium text-base-content">
+                    Nazwa uczelni <span className="text-error">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Uniwersytet Warszawski"
-                  className="input input-bordered bg-white text-gray-900 placeholder:text-gray-500"
+                  className="input input-bordered bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.nazwa}
                   onChange={(e) =>
                     setFormData({ ...formData, nazwa: e.target.value })
@@ -129,16 +109,16 @@ export default function DodajInstytucjePage() {
                 />
               </div>
 
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Miasto <span className="text-red-500">*</span>
+                  <span className="label-text font-medium text-base-content">
+                    Miasto <span className="text-error">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Warszawa"
-                  className="input input-bordered bg-white text-gray-900 placeholder:text-gray-500"
+                  className="input input-bordered bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.miasto}
                   onChange={(e) =>
                     setFormData({ ...formData, miasto: e.target.value })
@@ -148,14 +128,14 @@ export default function DodajInstytucjePage() {
                 />
               </div>
 
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Typ uczelni <span className="text-red-500">*</span>
+                  <span className="label-text font-medium text-base-content">
+                    Typ uczelni <span className="text-error">*</span>
                   </span>
                 </label>
                 <select
-                  className="select select-bordered bg-white text-gray-900"
+                  className="select select-bordered bg-base-100 text-base-content"
                   value={formData.typ}
                   onChange={(e) =>
                     setFormData({ ...formData, typ: e.target.value })
@@ -175,16 +155,16 @@ export default function DodajInstytucjePage() {
                 </select>
               </div>
 
-              <div className="form-control mb-6">
+              <div className="form-control flex flex-col mb-6">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
+                  <span className="label-text font-medium text-base-content">
                     Strona WWW
                   </span>
                 </label>
                 <input
                   type="url"
                   placeholder="https://www.uczelnia.pl"
-                  className="input input-bordered bg-white text-gray-900 placeholder:text-gray-500"
+                  className="input input-bordered bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.strona_www}
                   onChange={(e) =>
                     setFormData({ ...formData, strona_www: e.target.value })
@@ -192,7 +172,7 @@ export default function DodajInstytucjePage() {
                   disabled={ladowanie}
                 />
                 <label className="label">
-                  <span className="label-text-alt text-gray-500">
+                  <span className="label-text-alt text-base-content">
                     Opcjonalne - dodaj pełny adres URL
                   </span>
                 </label>

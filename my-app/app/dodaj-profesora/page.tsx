@@ -60,50 +60,30 @@ export default function DodajProfesoraPage() {
 
   if (!zalogowany) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-        <div className="flex-none gap-2">
-          <Link
-            href="/profil"
-            className="btn btn-ghost text-gray-700 hover:bg-indigo-50"
-          >
-            ← Profil
-          </Link>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200">
       <main className="container mx-auto px-4 py-8 max-w-2xl">
-        <div className="card bg-white shadow-xl border border-gray-200">
+        <div className="card bg-base-100 shadow-xl border border-base-200">
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            <h1 className="text-3xl font-bold text-base-content mb-2">
               Dodaj nowego profesora
             </h1>
-            <p className="text-gray-600 mb-6">
+            <p className="text-base-content mb-6">
               Wypełnij poniższy formularz, aby dodać profesora do bazy danych.
             </p>
 
             {sukces && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="bg-success bg-opacity-10 border border-success rounded-lg p-4 mb-6">
                 <div className="flex gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-green-600 shrink-0 h-6 w-6"
+                    className="stroke-success shrink-0 h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -114,7 +94,7 @@ export default function DodajProfesoraPage() {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="text-green-800 font-medium">
+                  <span className="text-success font-medium">
                     Profesor został pomyślnie dodany!
                   </span>
                 </div>
@@ -122,16 +102,16 @@ export default function DodajProfesoraPage() {
             )}
 
             <form onSubmit={handleSubmit}>
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Imię <span className="text-red-500">*</span>
+                  <span className="label-text font-medium">
+                    Imię <span className="text-error">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Jan"
-                  className="input input-bordered bg-white text-gray-900 placeholder:text-gray-500"
+                  className="input input-bordered bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.imie}
                   onChange={(e) =>
                     setFormData({ ...formData, imie: e.target.value })
@@ -141,16 +121,16 @@ export default function DodajProfesoraPage() {
                 />
               </div>
 
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Nazwisko <span className="text-red-500">*</span>
+                  <span className="label-text font-medium">
+                    Nazwisko <span className="text-error">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Kowalski"
-                  className="input input-bordered bg-white text-gray-900 placeholder:text-gray-500"
+                  className="input input-bordered bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.nazwisko}
                   onChange={(e) =>
                     setFormData({ ...formData, nazwisko: e.target.value })
@@ -160,14 +140,12 @@ export default function DodajProfesoraPage() {
                 />
               </div>
 
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Tytuł naukowy
-                  </span>
+                  <span className="label-text font-medium">Tytuł naukowy</span>
                 </label>
                 <select
-                  className="select select-bordered bg-white text-gray-900"
+                  className="select select-bordered bg-base-100 text-base-content"
                   value={formData.tytul_naukowy}
                   onChange={(e) =>
                     setFormData({ ...formData, tytul_naukowy: e.target.value })
@@ -182,17 +160,17 @@ export default function DodajProfesoraPage() {
                 </select>
               </div>
 
-              <div className="form-control mb-4">
+              <div className="form-control flex flex-col mb-4">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
-                    Uczelnie <span className="text-red-500">*</span>
+                  <span className="label-text font-medium">
+                    Uczelnie <span className="text-error">*</span>
                   </span>
                 </label>
-                <div className="space-y-2 p-4 border-2 border-gray-200 rounded-lg bg-white max-h-48 overflow-y-auto">
+                <div className="space-y-2 p-4 border-2 border-base-200 rounded-lg bg-base-100 max-h-48 overflow-y-auto">
                   {mockInstitutions.map((inst) => (
                     <label
                       key={inst.id_instytucji}
-                      className="flex items-center gap-3 cursor-pointer hover:bg-indigo-50 p-3 rounded-lg transition-colors border border-transparent hover:border-indigo-200"
+                      className="flex items-center gap-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 p-3 rounded-lg transition-colors border border-transparent hover:border-primary hover:border-opacity-20"
                     >
                       <input
                         type="checkbox"
@@ -205,7 +183,7 @@ export default function DodajProfesoraPage() {
                         }
                         disabled={ladowanie}
                       />
-                      <span className="text-gray-800 font-medium">
+                      <span className="text-base-content font-medium">
                         {inst.nazwa}
                       </span>
                     </label>
@@ -213,22 +191,22 @@ export default function DodajProfesoraPage() {
                 </div>
                 {formData.tab_id_instytucji.length === 0 && (
                   <label className="label">
-                    <span className="label-text-alt text-red-500">
+                    <span className="label-text-alt text-error">
                       Wybierz przynajmniej jedną uczelnie
                     </span>
                   </label>
                 )}
               </div>
 
-              <div className="form-control mb-6">
+              <div className="form-control flex flex-col mb-6">
                 <label className="label">
-                  <span className="label-text font-medium text-gray-700">
+                  <span className="label-text font-medium">
                     Dodatkowe informacje
                   </span>
                 </label>
                 <textarea
                   placeholder="Np. specjalizacja, przedmioty, dodatkowe informacje..."
-                  className="textarea textarea-bordered h-24 bg-white text-gray-900 placeholder:text-gray-500"
+                  className="textarea textarea-bordered h-24 bg-base-100 text-base-content placeholder:text-base-content"
                   value={formData.szczegoly}
                   onChange={(e) =>
                     setFormData({ ...formData, szczegoly: e.target.value })

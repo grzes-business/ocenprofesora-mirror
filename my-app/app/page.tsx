@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
-import Link from "next/link";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  const { zalogowany, user, wyloguj } = useAuth();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,94 +15,15 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br flex justify-between flex-col from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-        <div className="flex-none gap-2">
-          {zalogowany ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar placeholder"
-                aria-label="Menu użytkownika"
-              >
-                <div className="bg-primary text-primary-content w-10 rounded-full">
-                  <span className="text-sm font-semibold">
-                    {user?.imie_wyswietlane?.charAt(0) || "U"}
-                  </span>
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 p-2 shadow-lg border border-gray-200"
-              >
-                <li>
-                  <Link
-                    href="/profil"
-                    className="text-gray-700 hover:bg-indigo-50"
-                  >
-                    Profil
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dodaj-profesora"
-                    className="text-gray-700 hover:bg-indigo-50"
-                  >
-                    Dodaj profesora
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/dodaj-instytucje"
-                    className="text-gray-700 hover:bg-indigo-50"
-                  >
-                    Dodaj instytucję
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={wyloguj}
-                    className="text-gray-700 hover:bg-indigo-50"
-                  >
-                    Wyloguj
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <>
-              <Link
-                href="/logowanie"
-                className="btn btn-ghost text-gray-700 hover:bg-indigo-50"
-              >
-                Logowanie
-              </Link>
-              <Link href="/rejestracja" className="btn btn-primary">
-                Rejestracja
-              </Link>
-            </>
-          )}
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200 flex justify-between flex-col">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-20">
         <div className="max-w-3xl mx-auto text-center">
           {/* Hero Section */}
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-base-content mb-6">
             Znajdź swojego profesora
           </h1>
-          <p className="text-xl text-gray-600 mb-12">
+          <p className="text-xl text-base-content opacity-80 mb-12">
             Przeglądaj opinie studentów i oceniaj wykładowców akademickich
           </p>
 
@@ -115,20 +33,19 @@ export default function HomePage() {
               <input
                 type="text"
                 placeholder="Wpisz imię i nazwisko profesora..."
-                className="input input-bordered input-lg join-item w-full bg-white text-gray-900 placeholder:text-gray-500"
+                className="input input-bordered input-lg join-item w-full bg-base-100 text-base-content outline-none placeholder:text-base-content placeholder:opacity-50"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 type="submit"
-                className="btn btn-primary btn-lg join-item"
+                className="btn btn-primary text-primary-content btn-lg join-item"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-6 w-6 stroke-primary-content"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
                 >
                   <path
                     strokeLinecap="round"
@@ -144,7 +61,7 @@ export default function HomePage() {
 
           {/* Info Cards */}
           <div className="grid md:grid-cols-3 gap-6 mt-16">
-            <div className="card bg-white shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+            <div className="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-shadow">
               <div className="card-body">
                 <h2 className="card-title justify-center">
                   <svg
@@ -162,13 +79,13 @@ export default function HomePage() {
                     />
                   </svg>
                 </h2>
-                <p className="text-center text-gray-700">
+                <p className="text-center text-base-content">
                   Wyszukuj profesorów z różnych uczelni w Polsce
                 </p>
               </div>
             </div>
 
-            <div className="card bg-white shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+            <div className="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-shadow">
               <div className="card-body">
                 <h2 className="card-title justify-center">
                   <svg
@@ -186,13 +103,13 @@ export default function HomePage() {
                     />
                   </svg>
                 </h2>
-                <p className="text-center text-gray-700">
+                <p className="text-center text-base-content">
                   Przeglądaj oceny i opinie innych studentów
                 </p>
               </div>
             </div>
 
-            <div className="card bg-white shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow">
+            <div className="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-shadow">
               <div className="card-body">
                 <h2 className="card-title justify-center">
                   <svg
@@ -210,7 +127,7 @@ export default function HomePage() {
                     />
                   </svg>
                 </h2>
-                <p className="text-center text-gray-700">
+                <p className="text-center text-base-content">
                   Dodawaj własne recenzje i oceny wykładowców
                 </p>
               </div>
@@ -221,7 +138,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="mt-auto pt-20 pb-8">
-        <div className="text-center text-gray-600">
+        <div className="text-center text-base-content opacity-80">
           <p>
             Copyright © 2025 - OcenProfesora.pl - Polska społeczność studencka
           </p>

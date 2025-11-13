@@ -41,10 +41,10 @@ export default function LogowaniePage() {
               OcenProfesora.pl
             </Link>
             <h1 className="text-3xl font-bold mt-4 text-base-content">
-              Logowanie
+              Rejestracja
             </h1>
             <p className="text-base-content opacity-80 mt-2">
-              Witaj ponownie! Zaloguj się do swojego konta.
+              Dołącz do społeczności studentów na ocenprofesora.pl!
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function LogowaniePage() {
               <div className="flex gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-error shrink-0 h-6 w-6"
+                  className="stroke-error-content shrink-0 h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -89,7 +89,9 @@ export default function LogowaniePage() {
                     d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-error text-sm font-medium">{blad}</span>
+                <span className="text-error-content text-sm font-medium">
+                  {blad}
+                </span>
               </div>
             </div>
           )}
@@ -149,12 +151,12 @@ export default function LogowaniePage() {
           <div className="divider">lub</div>
           <div className="text-center">
             <p className="text-sm text-base-content opacity-80">
-              Nie masz konta?{" "}
+              Masz już konto?{" "}
               <Link
-                href="/rejestracja"
+                href="/logowanie"
                 className="text-primary-content font-semibold hover:underline"
               >
-                Zarejestruj się
+                Zaloguj się
               </Link>
             </p>
           </div>

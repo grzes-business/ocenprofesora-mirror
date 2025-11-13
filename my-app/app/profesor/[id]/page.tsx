@@ -102,32 +102,33 @@ export default function ProfesorDetailPage() {
     setNowaRecenzja({ tresc: "", ocena: 5 });
     setPokazFormularz(false);
     setWysylanieRecenzji(false);
-
-    // Show success message
-    alert("Recenzja została dodana pomyślnie!");
   };
 
   const renderStars = (rating: number) => {
     return (
-      <div className="flex gap-1">
+      <div className="rating">
         {[1, 2, 3, 4, 5].map((star) => (
-          <svg
+          <div
             key={star}
-            xmlns="http://www.w3.org/2000/svg"
-            className={`h-6 w-6 ${
-              star <= Math.round(rating)
-                ? "fill-yellow-400 stroke-yellow-400"
-                : "fill-gray-200 stroke-gray-300"
-            }`}
-            viewBox="0 0 24 24"
-            strokeWidth={1}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-            />
-          </svg>
+            className="mask mask-star-2 bg-accent"
+            aria-label={`${star} star`}
+            aria-current={rating >= star ? "true" : "false"}
+          ></div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderStarsAccentContent = (rating: number) => {
+    return (
+      <div className="rating">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <div
+            key={star}
+            className="mask mask-star-2 bg-accent-content"
+            aria-label={`${star} star`}
+            aria-current={rating >= star ? "true" : "false"}
+          ></div>
         ))}
       </div>
     );
@@ -135,7 +136,7 @@ export default function ProfesorDetailPage() {
 
   if (ladowanie) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
     );
@@ -143,23 +144,13 @@ export default function ProfesorDetailPage() {
 
   if (!profesor) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <header className="navbar bg-white shadow-md border-b border-gray-200">
-          <div className="flex-1">
-            <Link
-              href="/"
-              className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-            >
-              OcenProfesora.pl
-            </Link>
-          </div>
-        </header>
+      <div className="min-h-screen bg-base-200">
         <div className="container mx-auto px-4 py-12">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-red-800">
+          <div className="bg-error bg-opacity-10 border border-error rounded-lg p-6">
+            <h2 className="text-xl font-bold text-error">
               Nie znaleziono profesora
             </h2>
-            <p className="text-red-700 mt-2">
+            <p className="text-error mt-2">
               Profesor o podanym ID nie istnieje.
             </p>
             <Link href="/wynik" className="btn btn-primary mt-4">
@@ -172,57 +163,34 @@ export default function ProfesorDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="navbar bg-white shadow-md border-b border-gray-200">
-        <div className="flex-1">
-          <Link
-            href="/"
-            className="btn btn-ghost text-xl font-bold text-primary hover:bg-indigo-50"
-          >
-            OcenProfesora.pl
-          </Link>
-        </div>
-        <div className="flex-none">
-          <Link
-            href="/wynik"
-            className="btn btn-ghost text-gray-700 hover:bg-indigo-50"
-          >
-            ← Wróć do wyników
-          </Link>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-base-200">
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Professor Info Card */}
-        <div className="card bg-white shadow-xl border border-gray-200 mb-8">
+        <div className="card bg-base-100 shadow-xl border border-base-200 mb-8">
           <div className="card-body">
             <div className="flex flex-col md:flex-row justify-between items-start gap-6">
               <div className="flex-1">
-                <h1 className="text-4xl font-bold text-gray-800 mb-2">
+                <h1 className="text-4xl font-bold text-base-content mb-2">
                   {profesor.tytul_naukowy} {profesor.imie} {profesor.nazwisko}
                 </h1>
-                <p className="text-lg text-gray-600 mb-4">
+                <p className="text-lg text-base-content mb-4">
                   {getInstitutionNames(profesor.tab_id_instytucji)}
                 </p>
                 {profesor.szczegoly && (
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-base-content leading-relaxed">
                     {profesor.szczegoly}
                   </p>
                 )}
               </div>
-              <div className="flex flex-col items-center bg-indigo-50 rounded-lg p-6 min-w-[200px]">
-                <div className="text-6xl font-bold text-primary mb-2">
+              <div className="flex flex-col items-center bg-primary bg-opacity-10 rounded-lg p-6 min-w-[200px]">
+                <div className="text-6xl font-bold text-primary-content mb-2">
                   {profesor.ocena.toFixed(1)}
                 </div>
-                <div className="mb-2">{renderStars(profesor.ocena)}</div>
-                <div className="text-sm text-gray-600">
-                  na podstawie {recenzje.length}{" "}
-                  {recenzje.length === 1
-                    ? "recenzji"
-                    : recenzje.length < 5
-                    ? "recenzji"
-                    : "recenzji"}
+                <div className="mb-2">
+                  {renderStarsAccentContent(profesor.ocena)}
+                </div>
+                <div className="text-sm text-primary-content">
+                  na podstawie {recenzje.length} recenzji
                 </div>
               </div>
             </div>
@@ -256,14 +224,14 @@ export default function ProfesorDetailPage() {
 
         {/* Reviews Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl font-bold text-base-content mb-4">
             Recenzje studentów ({recenzje.length})
           </h2>
 
           {recenzje.length === 0 ? (
-            <div className="card bg-white shadow-md border border-gray-200">
+            <div className="card bg-base-100 shadow-md border border-base-200">
               <div className="card-body">
-                <p className="text-gray-600 text-center py-8">
+                <p className="text-base-content text-center py-8">
                   Brak recenzji dla tego profesora.{" "}
                   {zalogowany
                     ? "Bądź pierwszy i dodaj swoją opinię!"
@@ -276,15 +244,15 @@ export default function ProfesorDetailPage() {
               {recenzje.map((recenzja) => (
                 <div
                   key={recenzja.id_wpisu}
-                  className="card bg-white shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
+                  className="card bg-base-100 shadow-md border border-base-200 hover:shadow-lg transition-shadow"
                 >
                   <div className="card-body">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <div className="font-semibold text-gray-800">
+                        <div className="font-semibold text-base-content">
                           {recenzja.imie_studenta || "Użytkownik anonimowy"}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-base-content">
                           {new Date(
                             recenzja.data_utworzenia
                           ).toLocaleDateString("pl-PL", {
@@ -298,12 +266,12 @@ export default function ProfesorDetailPage() {
                         <div className="text-2xl font-bold text-primary mb-1">
                           {recenzja.ocena.toFixed(1)}
                         </div>
-                        <div className="scale-75">
+                        <div className="w-full flex items-end justify-end ">
                           {renderStars(recenzja.ocena)}
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
+                    <p className="text-base-content leading-relaxed">
                       {recenzja.tresc}
                     </p>
                   </div>
@@ -317,78 +285,72 @@ export default function ProfesorDetailPage() {
       {/* Add Review Modal */}
       {pokazFormularz && (
         <div className="modal modal-open">
-          <div className="modal-box bg-white max-w-2xl">
-            <h3 className="font-bold text-2xl text-gray-800 mb-4">
+          <div className="modal-box bg-base-100 max-w-2xl">
+            <h3 className="font-bold text-2xl text-base-content mb-4">
               Dodaj recenzję dla {profesor?.tytul_naukowy} {profesor?.imie}{" "}
               {profesor?.nazwisko}
             </h3>
+            <div className="flex flex-col gap-6">
+              <div className="form-control">
+                <div className="flex items-center justify-center gap-8 p-6 bg-base-100 rounded-lg">
+                  <div className="text-6xl font-bold text-primary">
+                    {nowaRecenzja.ocena.toFixed(1)}
+                  </div>
 
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text text-gray-700 font-semibold">
-                  Ocena (1-5)
-                </span>
-              </label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="range"
-                  min="1"
-                  max="5"
-                  step="1"
-                  value={nowaRecenzja.ocena}
-                  onChange={(e) =>
-                    setNowaRecenzja({
-                      ...nowaRecenzja,
-                      ocena: parseInt(e.target.value),
-                    })
-                  }
-                  className="range range-primary"
-                />
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold text-primary">
-                    {nowaRecenzja.ocena}
-                  </span>
-                  <div className="scale-75">
-                    {renderStars(nowaRecenzja.ocena)}
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="rating rating-lg">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <input
+                          key={star}
+                          type="radio"
+                          name="rating-7"
+                          className="mask mask-star-2 bg-accent cursor-pointer hover:scale-110 transition-transform"
+                          aria-label={`${star} star${star !== 1 ? "s" : ""}`}
+                          checked={nowaRecenzja.ocena === star}
+                          onChange={() =>
+                            setNowaRecenzja({
+                              ...nowaRecenzja,
+                              ocena: star,
+                            })
+                          }
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-base-content opacity-70">
+                      Kliknij, aby wybrać ocenę
+                    </span>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 px-2 mt-1">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
-              </div>
-            </div>
 
-            <div className="form-control mb-6">
-              <label className="label">
-                <span className="label-text text-gray-700 font-semibold">
-                  Twoja opinia
-                </span>
-              </label>
-              <textarea
-                className="textarea textarea-bordered bg-white border-gray-300 h-32 text-gray-800 focus:border-primary focus:outline-none"
-                placeholder="Podziel się swoją opinią o tym profesorze..."
-                value={nowaRecenzja.tresc}
-                onChange={(e) =>
-                  setNowaRecenzja({ ...nowaRecenzja, tresc: e.target.value })
-                }
-                maxLength={1000}
-              ></textarea>
-              <label className="label">
-                <span className="label-text-alt text-gray-500">
-                  {nowaRecenzja.tresc.length}/1000 znaków
-                </span>
-              </label>
+              <div className="form-control flex flex-col">
+                <label className="label">
+                  <span className="label-text text-base-content font-semibold">
+                    Twoja opinia
+                  </span>
+                </label>
+                <textarea
+                  className="textarea textarea-bordered bg-base-100 border-base-200 h-32 text-base-content focus:border-primary focus:outline-none w-full"
+                  placeholder="Podziel się swoją opinią o tym profesorze..."
+                  value={nowaRecenzja.tresc}
+                  onChange={(e) =>
+                    setNowaRecenzja({ ...nowaRecenzja, tresc: e.target.value })
+                  }
+                  maxLength={1000}
+                ></textarea>
+                <label className="label">
+                  <span className="label-text-alt text-base-content">
+                    {nowaRecenzja.tresc.length}/1000 znaków
+                  </span>
+                </label>
+              </div>
             </div>
 
             <div className="modal-action">
               <button
                 onClick={() => {
                   setPokazFormularz(false);
-                  setNowaRecenzja({ tresc: "", ocena: 5 });
+                  setNowaRecenzja({ tresc: "", ocena: 3 });
                 }}
                 className="btn btn-ghost"
                 disabled={wysylanieRecenzji}
