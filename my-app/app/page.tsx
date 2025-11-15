@@ -15,7 +15,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 flex justify-between flex-col">
+    <div className="min-h-[calc(100vh-4rem)] bg-base-200 flex justify-between flex-col">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-20">
         <div className="max-w-3xl mx-auto text-center">

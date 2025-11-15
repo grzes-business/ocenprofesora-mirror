@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // For DUMMY data source, we rely on client-side localStorage authentication
-  // Middleware cannot access localStorage, so we'll allow access and let
+  // Proxy cannot access localStorage, so we'll allow access and let
   // client-side components handle the redirect if needed
 
   // For API mode, you would check token from cookies here

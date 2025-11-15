@@ -12,7 +12,7 @@ export default function Header() {
       <div className="flex-1">
         <Link
           href="/"
-          className="btn btn-ghost text-xl font-bold text-base-content hover:text-primary-content hover:bg-primary hover:bg-opacity-10"
+          className="btn btn-ghost text-xl font-bold text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
         >
           OcenProfesora.pl
         </Link>
@@ -52,7 +52,7 @@ export default function Header() {
                 <li>
                   <Link
                     href="/profil"
-                    className="text-base-content hover:bg-primary hover:bg-opacity-10"
+                    className="text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
                   >
                     Profil
                   </Link>
@@ -60,7 +60,7 @@ export default function Header() {
                 <li>
                   <Link
                     href="/dodaj-profesora"
-                    className="text-base-content hover:bg-primary hover:bg-opacity-10"
+                    className="text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
                   >
                     Dodaj profesora
                   </Link>
@@ -68,7 +68,7 @@ export default function Header() {
                 <li>
                   <Link
                     href="/dodaj-instytucje"
-                    className="text-base-content hover:bg-primary hover:bg-opacity-10"
+                    className="text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
                   >
                     Dodaj instytucję
                   </Link>
@@ -76,7 +76,7 @@ export default function Header() {
                 <li>
                   <button
                     onClick={wyloguj}
-                    className="text-base-content hover:bg-primary hover:bg-opacity-10"
+                    className="text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
                   >
                     Wyloguj
                   </button>
@@ -94,7 +94,7 @@ export default function Header() {
             >
               <Link
                 href="/logowanie"
-                className="btn btn-ghost text-base-content hover:bg-primary hover:bg-opacity-10"
+                className="btn btn-ghost text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
               >
                 Logowanie
               </Link>
