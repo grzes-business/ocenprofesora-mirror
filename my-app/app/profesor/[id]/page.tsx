@@ -119,13 +119,13 @@ export default function ProfesorDetailPage() {
     );
   };
 
-  const renderStarsAccentContent = (rating: number) => {
+  const renderStarsPrimaryContent = (rating: number) => {
     return (
       <div className="rating">
         {[1, 2, 3, 4, 5].map((star) => (
           <div
             key={star}
-            className="mask mask-star-2 bg-accent-content"
+            className="mask mask-star-2 bg-primary-content"
             aria-label={`${star} star`}
             aria-current={rating >= star ? "true" : "false"}
           ></div>
@@ -187,7 +187,7 @@ export default function ProfesorDetailPage() {
                   {profesor.ocena.toFixed(1)}
                 </div>
                 <div className="mb-2">
-                  {renderStarsAccentContent(profesor.ocena)}
+                  {renderStarsPrimaryContent(profesor.ocena)}
                 </div>
                 <div className="text-sm text-primary-content">
                   na podstawie {recenzje.length} recenzji

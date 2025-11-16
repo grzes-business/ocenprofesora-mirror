@@ -1,56 +1,56 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const DAISYUI_THEMES = [
-  'light',
-  'dark',
-  'cupcake',
-  'bumblebee',
-  'emerald',
-  'corporate',
-  'synthwave',
-  'retro',
-  'cyberpunk',
-  'valentine',
-  'halloween',
-  'garden',
-  'forest',
-  'aqua',
-  'lofi',
-  'pastel',
-  'fantasy',
-  'wireframe',
-  'black',
-  'luxury',
-  'dracula',
-  'cmyk',
-  'autumn',
-  'business',
-  'acid',
-  'lemonade',
-  'night',
-  'coffee',
-  'winter',
-  'dim',
-  'nord',
-  'sunset',
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+  "dim",
+  "nord",
+  "sunset",
 ];
 
 export default function ThemePicker() {
-  const [currentTheme, setCurrentTheme] = useState('wireframe');
+  const [currentTheme, setCurrentTheme] = useState("wireframe");
 
   useEffect(() => {
     // Load theme from localStorage on mount
-    const savedTheme = localStorage.getItem('theme') || 'wireframe';
+    const savedTheme = localStorage.getItem("theme") || "wireframe";
     setCurrentTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
   const handleThemeChange = (theme: string) => {
     setCurrentTheme(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
     // Close the dropdown by removing focus
     const activeElement = document.activeElement as HTMLElement;
     activeElement?.blur();
@@ -91,7 +91,7 @@ export default function ThemePicker() {
             <li key={theme}>
               <button
                 onClick={() => handleThemeChange(theme)}
-                className={currentTheme === theme ? 'active' : ''}
+                className={currentTheme === theme ? "active" : ""}
               >
                 <span className="flex-1 capitalize">{theme}</span>
                 {currentTheme === theme && (
