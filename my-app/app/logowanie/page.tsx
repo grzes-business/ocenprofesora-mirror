@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function LogowaniePage() {
   const [email, setEmail] = useState("");
-  const [haslo, setHaslo] = useState("");
+  const [password, setPassword] = useState("");
   const [blad, setBlad] = useState("");
   const [ladowanie, setLadowanie] = useState(false);
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function LogowaniePage() {
     setBlad("");
     setLadowanie(true);
 
-    const success = await zaloguj({ email, haslo });
+    const success = await zaloguj({ email, password });
 
     if (success) {
       router.push("/");
@@ -49,7 +49,7 @@ export default function LogowaniePage() {
           </div>
 
           {/* Test Credentials Info */}
-          <div className="bg-info bg-opacity-10 border border-info rounded-lg p-4 mb-4">
+          {/* <div className="bg-info bg-opacity-10 border border-info rounded-lg p-4 mb-4">
             <div className="flex gap-3 items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export default function LogowaniePage() {
                 <div>Hasło: test123</div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Error Message */}
           {blad && (
@@ -78,7 +78,7 @@ export default function LogowaniePage() {
               <div className="flex gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-error shrink-0 h-6 w-6"
+                  className="stroke-error-content shrink-0 h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -89,7 +89,9 @@ export default function LogowaniePage() {
                     d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-error text-sm font-medium">{blad}</span>
+                <span className="text-content-error text-sm font-medium">
+                  {blad}
+                </span>
               </div>
             </div>
           )}
@@ -120,8 +122,8 @@ export default function LogowaniePage() {
                 type="password"
                 placeholder="••••••••"
                 className="input input-bordered bg-base-100 text-base-content w-full"
-                value={haslo}
-                onChange={(e) => setHaslo(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 disabled={ladowanie}
                 required
               />
@@ -152,7 +154,7 @@ export default function LogowaniePage() {
               Nie masz konta?{" "}
               <Link
                 href="/rejestracja"
-                className="text-primary-content font-semibold hover:underline"
+                className="text-base-content font-semibold hover:underline"
               >
                 Zarejestruj się
               </Link>

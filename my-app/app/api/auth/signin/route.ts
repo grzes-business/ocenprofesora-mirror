@@ -5,7 +5,7 @@ import { isUsingMockData } from "@/lib/utils/dataSource";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, password } = body;
+    const { name, surname, email, password } = body;
 
     if (!email || !password) {
       return NextResponse.json(
@@ -13,13 +13,13 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    // TODO: Call real API
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/signin`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, surname, email, password }),
       }
     );
     const data = await response.json();
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       { status: response.status }
     );
 
-    // Set token cookie if login was successful and token exists
+    // Set token cookie if registration was successful and token exists
     if (response.ok && data.token) {
       // Set cookie to expire in 7 days
       const maxAge = 7 * 24 * 60 * 60; // 7 days in seconds
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Error during login:", error);
     return NextResponse.json(
-      { error: "Błąd podczas logowania" },
+      { error: "Błąd podczas rejestracji" },
       { status: 500 }
     );
   }

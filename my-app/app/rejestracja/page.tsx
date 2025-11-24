@@ -6,24 +6,30 @@ import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 
 export default function LogowaniePage() {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
-  const [haslo, setHaslo] = useState("");
+  const [password, setPassword] = useState("");
   const [blad, setBlad] = useState("");
   const [ladowanie, setLadowanie] = useState(false);
   const router = useRouter();
-  const { zaloguj } = useAuth();
+  const { zarejestruj } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setBlad("");
     setLadowanie(true);
 
-    const success = await zaloguj({ email, haslo });
+    const result = await zarejestruj({ name, surname, email, password });
+
+    console.log("Czy rejestracja się powiodła?: ", result);
+
+    const success = result;
 
     if (success) {
       router.push("/");
     } else {
-      setBlad("Nieprawidłowy email lub hasło");
+      setBlad("Coś poszło nie tak ;(");
       setLadowanie(false);
     }
   };
@@ -49,7 +55,7 @@ export default function LogowaniePage() {
           </div>
 
           {/* Test Credentials Info */}
-          <div className="bg-info bg-opacity-10 border border-info rounded-lg p-4 mb-4">
+          {/* <div className="bg-info bg-opacity-10 border border-info rounded-lg p-4 mb-4">
             <div className="flex gap-3 items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +76,7 @@ export default function LogowaniePage() {
                 <div>Hasło: test123</div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Error Message */}
           {blad && (
@@ -101,6 +107,34 @@ export default function LogowaniePage() {
           <form onSubmit={handleSubmit}>
             <div className="form-control flex flex-col">
               <label className="label">
+                <span className="label-text font-medium">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Twoje Imię"
+                className="input input-bordered bg-base-100 text-base-content w-full"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={ladowanie}
+                required
+              />
+            </div>
+            <div className="form-control flex flex-col">
+              <label className="label">
+                <span className="label-text font-medium">Surname</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Twoje Nazwisko"
+                className="input input-bordered bg-base-100 text-base-content w-full"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                disabled={ladowanie}
+                required
+              />
+            </div>
+            <div className="form-control flex flex-col">
+              <label className="label">
                 <span className="label-text font-medium">Email</span>
               </label>
               <input
@@ -122,8 +156,8 @@ export default function LogowaniePage() {
                 type="password"
                 placeholder="••••••••"
                 className="input input-bordered bg-base-100 text-base-content w-full"
-                value={haslo}
-                onChange={(e) => setHaslo(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 disabled={ladowanie}
                 required
               />
@@ -141,7 +175,7 @@ export default function LogowaniePage() {
                     Logowanie...
                   </>
                 ) : (
-                  "Zaloguj się"
+                  "Zarejestruj się"
                 )}
               </button>
             </div>
@@ -154,7 +188,7 @@ export default function LogowaniePage() {
               Masz już konto?{" "}
               <Link
                 href="/logowanie"
-                className="text-primary-content font-semibold hover:underline"
+                className="text-base-content font-semibold hover:underline"
               >
                 Zaloguj się
               </Link>

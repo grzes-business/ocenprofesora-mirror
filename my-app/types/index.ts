@@ -30,7 +30,7 @@ export interface Wpis {
 export interface User {
   id_user: string;
   email: string;
-  haslo?: string; // Password (won't be sent to frontend in real app)
+  password?: string; // Password (won't be sent to frontend in real app)
   kierunek: string; // Field of study (can be multiple, comma-separated)
   tab_id_instytucji: string[]; // Array of institution IDs
   imie_wyswietlane?: string; // Display name for public profile
@@ -51,12 +51,19 @@ export interface SearchResult {
 
 export interface LoginCredentials {
   email: string;
-  haslo: string;
+  password: string;
+}
+
+export interface SignInCredentials {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
 }
 
 export interface RegisterData {
   email: string;
-  haslo: string;
+  password: string;
   kierunek: string;
   tab_id_instytucji: string[];
   imie_wyswietlane?: string;

@@ -4,7 +4,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_1",
     email: "jan.student@example.com",
-    haslo: "haslo123", // In real app, this would be hashed
+    password: "password123", // In real app, this would be hashed
     kierunek: "Informatyka",
     tab_id_instytucji: ["inst_2"],
     imie_wyswietlane: "Student A.",
@@ -13,7 +13,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_2",
     email: "anna.kowalska@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Matematyka",
     tab_id_instytucji: ["inst_1"],
     imie_wyswietlane: "Student B.",
@@ -22,7 +22,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_3",
     email: "piotr.nowak@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Chemia",
     tab_id_instytucji: ["inst_3"],
     imie_wyswietlane: "Student C.",
@@ -31,7 +31,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_4",
     email: "maria.test@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Fizyka",
     tab_id_instytucji: ["inst_2"],
     imie_wyswietlane: "Student D.",
@@ -40,7 +40,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_5",
     email: "tomasz.wisniewski@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Historia",
     tab_id_instytucji: ["inst_1"],
     imie_wyswietlane: "Student E.",
@@ -49,7 +49,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_6",
     email: "katarzyna.zielinska@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Psychologia",
     tab_id_instytucji: ["inst_1"],
     imie_wyswietlane: "Student F.",
@@ -58,7 +58,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_7",
     email: "marcin.nowicki@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Prawo",
     tab_id_instytucji: ["inst_4"],
     imie_wyswietlane: "Student G.",
@@ -67,7 +67,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_8",
     email: "anna.kaczmarek@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Biologia",
     tab_id_instytucji: ["inst_4"],
     imie_wyswietlane: "Student H.",
@@ -76,7 +76,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_9",
     email: "jakub.wojcik@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Informatyka Stosowana",
     tab_id_instytucji: ["inst_6"],
     imie_wyswietlane: "Student I.",
@@ -85,7 +85,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_10",
     email: "monika.lewandowska@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Farmacja",
     tab_id_instytucji: ["inst_5"],
     imie_wyswietlane: "Student J.",
@@ -94,7 +94,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_11",
     email: "lukasz.szymanski@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Oceanografia",
     tab_id_instytucji: ["inst_6"],
     imie_wyswietlane: "Student K.",
@@ -103,7 +103,7 @@ export const mockUsers: User[] = [
   {
     id_user: "user_12",
     email: "natalia.kowalska@example.com",
-    haslo: "haslo123",
+    password: "password123",
     kierunek: "Filologia Polska",
     tab_id_instytucji: ["inst_7"],
     imie_wyswietlane: "Student L.",
@@ -114,5 +114,5 @@ export const mockUsers: User[] = [
 // Default mock user for login testing
 export const MOCK_USER_CREDENTIALS = {
   email: "test@ocenprofesora.pl",
-  haslo: "test123",
+  password: "test123",
 };

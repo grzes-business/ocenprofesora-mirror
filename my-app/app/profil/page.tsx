@@ -199,7 +199,7 @@ export default function ProfilPage() {
               </Link>
 
               <button
-                onClick={wyloguj}
+                onClick={() => wyloguj()}
                 className="btn btn-outline btn-error justify-start"
               >
                 <svg

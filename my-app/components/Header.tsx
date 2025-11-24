@@ -75,7 +75,7 @@ export default function Header() {
                 </li>
                 <li>
                   <button
-                    onClick={wyloguj}
+                    onClick={() => wyloguj()}
                     className="text-base-content hover:bg-primary hover:bg-opacity-10 hover:text-primary-content"
                   >
                     Wyloguj
