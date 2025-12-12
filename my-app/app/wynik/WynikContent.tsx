@@ -146,19 +146,19 @@ export default function WynikContent() {
               <div className="grid gap-4">
                 {profesorowie.map((profesor) => (
                   <Link
-                    key={profesor.id_profesora}
-                    href={`/profesor/${profesor.id_profesora}`}
+                    key={profesor.id}
+                    href={`/profesor/${profesor.id}`}
                     className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow border border-base-200"
                   >
                     <div className="card-body">
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <h2 className="card-title text-2xl">
-                            {profesor.tytul_naukowy} {profesor.imie}{" "}
-                            {profesor.nazwisko}
+                            {profesor.degree} {profesor.name} {profesor.surname}
                           </h2>
                           <p className="text-sm text-base-content opacity-80 mt-2">
-                            {getInstitutionNames(profesor.tab_id_instytucji)}
+                            {/* {getInstitutionNames(profesor.tab_id_instytucji)} */}{" "}
+                            - brakuje narazie tab_id_instytucji u profesora
                           </p>
                           {profesor.szczegoly && (
                             <p className="text-sm text-base-content mt-3">
@@ -168,10 +168,12 @@ export default function WynikContent() {
                         </div>
                         <div className="text-right ml-4">
                           <div className="stat-value text-primary">
-                            {profesor.ocena.toFixed(1)}
+                            {profesor.ocena
+                              ? profesor.ocena.toFixed(1)
+                              : "undefined"}
                           </div>
                           <div className="mt-2">
-                            {renderStars(profesor.ocena)}
+                            {renderStars(profesor.ocena ? profesor.ocena : 0)}
                           </div>
                         </div>
                       </div>

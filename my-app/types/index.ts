@@ -6,24 +6,25 @@ export interface Instytucja {
 
 // Profesor (Professor)
 export interface Profesor {
-  id_profesora: string;
-  imie: string;
-  nazwisko: string;
-  tytul_naukowy?: string;
+  id: string;
+  name: string;
+  surname: string;
+  degree?: string;
+  reviews: Wpis[];
   szczegoly?: string;
-  ocena: number; // Average grade (1-5)
-  tab_id_instytucji: string[]; // Array of institution IDs
+  ocena?: number; // Average grade (1-5)
+  tab_id_instytucji?: string[]; // Array of institution IDs
 }
 
 // Wpis (Review/Entry)
 export interface Wpis {
-  id_wpisu: string;
-  id_user: string;
-  tresc: string; // Content of the review
-  id_profesora: string;
-  ocena: number; // Grade (1-5)
-  data_utworzenia: Date;
-  imie_studenta?: string; // Display name for the review
+  id: string;
+  content: string; // Content of the review
+  ratio: number; // Grade (1-5)
+  userId: string;
+  professorId: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 // User

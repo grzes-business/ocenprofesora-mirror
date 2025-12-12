@@ -19,11 +19,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [ladowanie, setLadowanie] = useState(true);
 
   // Load user from localStorage on mount
-  // useEffect(() => {
-  //   const zalogowanyFlag = localStorage.getItem("zalogowany");
+  useEffect(() => {
+    const zalogowanyFlag = localStorage.getItem("zalogowany");
+    const email = localStorage.getItem("email");
 
-  //   setLadowanie(false);
-  // }, []);
+    if (zalogowanyFlag === "true" && email) {
+      const restoredUser: User = {
+        id_user: "test-user-1",
+        email: email,
+        kierunek: "Informatyka",
+        tab_id_instytucji: ["inst_1"],
+        imie_wyswietlane: "Test User",
+        bio: "Student testowy",
+        zweryfikowany: true,
+      };
+      setUser(restoredUser);
+    }
+
+    setLadowanie(false);
+  }, []);
 
   // const zalogujDummy = async (
   //   credentials: LoginCredentials

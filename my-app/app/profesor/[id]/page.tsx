@@ -41,9 +41,9 @@ export default function ProfesorDetailPage() {
       const data = await response.json();
 
       // API returns professor with instytucje and wpisy directly
-      if (data && data.id_profesora) {
+      if (data && data.id) {
         setProfesor(data);
-        setRecenzje(data.wpisy || []);
+        setRecenzje(data.reviews || []);
       } else {
         setProfesor(null);
         setRecenzje([]);
@@ -76,21 +76,53 @@ export default function ProfesorDetailPage() {
 
     // Create new review locally
     const nowyWpis: Wpis = {
-      id_wpisu: `wpis_${Date.now()}`,
-      id_user: user.id_user,
-      tresc: nowaRecenzja.tresc,
-      id_profesora: profesor.id_profesora,
-      ocena: nowaRecenzja.ocena,
-      data_utworzenia: new Date(),
-      imie_studenta: user.imie_wyswietlane || "Anonimowy Student",
+      id: `wpis_${Date.now()}`,
+      content: nowaRecenzja.tresc,
+      ratio: nowaRecenzja.ocena,
+      userId: user.id_user,
+      professorId: profesor.id,
+      created_at: new Date(),
+      updated_at: new Date(),
     };
+
+    setLadowanie(true);
+
+    try {
+      const response = await fetch("/api/professors", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: nowyWpis.id,
+          content: nowyWpis.content,
+          ratio: nowyWpis.ratio,
+          userId: nowyWpis.userId,
+          professorId: nowyWpis.professorId,
+          created_at: nowyWpis.created_at,
+          updated_at: nowyWpis.updated_at,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to add professor");
+      }
+
+      setLadowanie(false);
+    } catch (error) {
+      console.error("Error adding professor:", error);
+      setLadowanie(false);
+      // You may want to add error state handling here
+    }
 
     // Add to the beginning of the reviews array
     const noweRecenzje = [nowyWpis, ...recenzje];
     setRecenzje(noweRecenzje);
 
     // Recalculate average rating
-    const sumaOcen = noweRecenzje.reduce((sum, r) => sum + r.ocena, 0);
+    const sumaOcen = noweRecenzje.reduce((sum, r) => sum + r.ratio, 0);
     const nowaOcena = sumaOcen / noweRecenzje.length;
 
     setProfesor({
@@ -147,10 +179,10 @@ export default function ProfesorDetailPage() {
       <div className="min-h-screen bg-base-200">
         <div className="container mx-auto px-4 py-12">
           <div className="bg-error bg-opacity-10 border border-error rounded-lg p-6">
-            <h2 className="text-xl font-bold text-error">
+            <h2 className="text-xl font-bold text-error-content">
               Nie znaleziono profesora
             </h2>
-            <p className="text-error mt-2">
+            <p className="text-error-content mt-2">
               Profesor o podanym ID nie istnieje.
             </p>
             <Link href="/wynik" className="btn btn-primary mt-4">
@@ -171,10 +203,10 @@ export default function ProfesorDetailPage() {
             <div className="flex flex-col md:flex-row justify-between items-start gap-6">
               <div className="flex-1">
                 <h1 className="text-4xl font-bold text-base-content mb-2">
-                  {profesor.tytul_naukowy} {profesor.imie} {profesor.nazwisko}
+                  {profesor.degree} {profesor.name} {profesor.surname}
                 </h1>
                 <p className="text-lg text-base-content mb-4">
-                  {getInstitutionNames(profesor.tab_id_instytucji)}
+                  {/* {getInstitutionNames(profesor.tab_id_instytucji)} // TODO: implement tab_id_instytucji */}
                 </p>
                 {profesor.szczegoly && (
                   <p className="text-base-content leading-relaxed">
@@ -184,10 +216,12 @@ export default function ProfesorDetailPage() {
               </div>
               <div className="flex flex-col items-center bg-primary bg-opacity-10 rounded-lg p-6 min-w-[200px]">
                 <div className="text-6xl font-bold text-primary-content mb-2">
-                  {profesor.ocena.toFixed(1)}
+                  {profesor.ocena ? profesor.ocena.toFixed(1) : 0}
                 </div>
                 <div className="mb-2">
-                  {renderStarsPrimaryContent(profesor.ocena)}
+                  {renderStarsPrimaryContent(
+                    profesor.ocena ? profesor.ocena : 0
+                  )}
                 </div>
                 <div className="text-sm text-primary-content">
                   na podstawie {recenzje.length} recenzji
@@ -243,36 +277,37 @@ export default function ProfesorDetailPage() {
             <div className="space-y-4">
               {recenzje.map((recenzja) => (
                 <div
-                  key={recenzja.id_wpisu}
+                  key={recenzja.id}
                   className="card bg-base-100 shadow-md border border-base-200 hover:shadow-lg transition-shadow"
                 >
                   <div className="card-body">
                     <div className="flex justify-between items-start mb-3">
                       <div>
                         <div className="font-semibold text-base-content">
-                          {recenzja.imie_studenta || "Użytkownik anonimowy"}
+                          {"Użytkownik anonimowy"}
                         </div>
                         <div className="text-sm text-base-content">
-                          {new Date(
-                            recenzja.data_utworzenia
-                          ).toLocaleDateString("pl-PL", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
+                          {new Date(recenzja.created_at).toLocaleDateString(
+                            "pl-PL",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
                         </div>
                       </div>
                       <div className="flex flex-col items-end">
                         <div className="text-2xl font-bold text-primary mb-1">
-                          {recenzja.ocena.toFixed(1)}
+                          {recenzja.ratio.toFixed(1)}
                         </div>
                         <div className="w-full flex items-end justify-end ">
-                          {renderStars(recenzja.ocena)}
+                          {renderStars(recenzja.ratio)}
                         </div>
                       </div>
                     </div>
                     <p className="text-base-content leading-relaxed">
-                      {recenzja.tresc}
+                      {recenzja.content}
                     </p>
                   </div>
                 </div>
@@ -287,8 +322,8 @@ export default function ProfesorDetailPage() {
         <div className="modal modal-open">
           <div className="modal-box bg-base-100 max-w-2xl">
             <h3 className="font-bold text-2xl text-base-content mb-4">
-              Dodaj recenzję dla {profesor?.tytul_naukowy} {profesor?.imie}{" "}
-              {profesor?.nazwisko}
+              Dodaj recenzję dla {profesor?.degree} {profesor?.name}{" "}
+              {profesor?.surname}
             </h3>
             <div className="flex flex-col gap-6">
               <div className="form-control">
@@ -334,7 +369,10 @@ export default function ProfesorDetailPage() {
                   placeholder="Podziel się swoją opinią o tym profesorze..."
                   value={nowaRecenzja.tresc}
                   onChange={(e) =>
-                    setNowaRecenzja({ ...nowaRecenzja, tresc: e.target.value })
+                    setNowaRecenzja({
+                      ...nowaRecenzja,
+                      tresc: e.target.value,
+                    })
                   }
                   maxLength={1000}
                 ></textarea>

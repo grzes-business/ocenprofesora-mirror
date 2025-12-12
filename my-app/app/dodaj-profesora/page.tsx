@@ -30,8 +30,25 @@ export default function DodajProfesoraPage() {
     e.preventDefault();
     setLadowanie(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/professors", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.imie,
+          surname: formData.nazwisko,
+          degree: formData.tytul_naukowy,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to add professor");
+      }
+
       setSukces(true);
       setLadowanie(false);
 
@@ -46,7 +63,27 @@ export default function DodajProfesoraPage() {
         });
         setSukces(false);
       }, 2000);
-    }, 1000);
+    } catch (error) {
+      console.error("Error adding professor:", error);
+      setLadowanie(false);
+      // You may want to add error state handling here
+    }
+    // setTimeout(() => {
+    //   setSukces(true);
+    //   setLadowanie(false);
+
+    //   // Reset form after 2 seconds
+    //   setTimeout(() => {
+    //     setFormData({
+    //       imie: "",
+    //       nazwisko: "",
+    //       tytul_naukowy: "",
+    //       szczegoly: "",
+    //       tab_id_instytucji: [],
+    //     });
+    //     setSukces(false);
+    //   }, 2000);
+    // }, 1000);
   };
 
   const handleInstitutionToggle = (instId: string) => {
@@ -83,7 +120,7 @@ export default function DodajProfesoraPage() {
                 <div className="flex gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-success shrink-0 h-6 w-6"
+                    className="stroke-success-content shrink-0 h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -94,7 +131,7 @@ export default function DodajProfesoraPage() {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="text-success font-medium">
+                  <span className="text-success-content font-medium">
                     Profesor został pomyślnie dodany!
                   </span>
                 </div>
@@ -153,10 +190,20 @@ export default function DodajProfesoraPage() {
                   disabled={ladowanie}
                 >
                   <option value="">Wybierz tytuł</option>
-                  <option value="mgr">mgr</option>
-                  <option value="dr">dr</option>
-                  <option value="dr hab.">dr hab.</option>
-                  <option value="prof. dr hab.">prof. dr hab.</option>
+                  <option value="MASTER">Magister</option>
+                  <option value="MASTER_OF_ENGINEERING">
+                    Magister inżynier
+                  </option>
+                  <option value="DOCTOR">Doktor</option>
+                  <option value="DOCTOR_OF_ENGINEETING">Doktor inżynier</option>
+                  <option value="DOCTOR_HABILITATUS">
+                    Doktor habilitowany
+                  </option>
+                  <option value="UNIVERSITY_PROFESSOR">Profesor uczelni</option>
+                  <option value="PROFESSOR">Profesor</option>
+                  <option value="PROFESSOR_OF_ENGINEETING">
+                    Profesor inżynier
+                  </option>
                 </select>
               </div>
 

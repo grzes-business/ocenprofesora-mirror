@@ -9,20 +9,20 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "daisyui": "^5.4.7",
-    "framer-motion": "^12.23.24",
-    "next": "16.0.1",
+    "daisyui": "^5.5.13",
+    "framer-motion": "^12.23.26",
+    "next": "16.0.10",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^20.19.26",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.1",
     "eslint-config-next": "16.0.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   }
 }
